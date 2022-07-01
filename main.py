@@ -1,6 +1,7 @@
 import string
 import random
 import base64
+import os
 
 def pwd_gen(length, special, digits, toggle):
     pwd= []
@@ -65,46 +66,87 @@ def parameters():
 
 def pwd_maker():
     while True:
-        length, special, digits, toggle = parameters()
-        password = pwd_gen(length, special, digits, toggle+2)
-        print(password)
+        length, special, digits, toggle = parameters() #taking password criteria
+        password = pwd_gen(length, special, digits, toggle+2) #generating password
+        print(password) #asking user to keep the password or not
         keep = input("KEEP Password(Y/N): ")
         if keep.lower() == "y":
             caption = input("Enter a tag for password: ")
             break
-    final_password = f"{caption}:{password}"
-    final_password = encrypt(final_password)
+    final_password = f"{caption} : {password}" #save format
+    final_password = encrypt(final_password) #encryption
+    with open(f"random_passwords.txt","a") as f:
+        f.write(f"{final_password}\n") #storing excrpyted password
     print(f'"{decrypt(final_password)}" stored successfully!')
-    with open(f"{username}_passwords.txt","a") as f:
-        f.write(f"{final_password}\n")
 
 
-def encrypt(string_sample):
+def pwd_display(): #displaying passwords
+    with open("random_passwords.txt","r") as f:
+        for line in f.readlines(): #taking single line from file
+            line = line.replace("\n","")
+            print(f"{decrypt(line)}") #printing decrypted line
+
+
+def encrypt(string_sample): #base64 encryprion
     string_bytes = string_sample.encode("ascii")
     base64_bytes = base64.b64encode(string_bytes)
     base64_string = base64_bytes.decode("ascii")
     return base64_string
 
 
-def decrypt(base64_string):
+def decrypt(base64_string): #base64 decryption
     base64_bytes = base64_string.encode("ascii")
     string_bytes = base64.b64decode(base64_bytes)
     string_sample = string_bytes.decode("ascii")
     return string_sample
 
 
-def user():
+def start():
     try:
-        with open("username.txt","r") as f:
-            username = decrypt(f.read())
+        with open("master.txt","r") as f:
+            master = []
+            for line in f.readlines():
+                master.append(decrypt(line))
+            username = master[0].replace("\n","")
+            master_password = master[1].replace("\n","")
+            input_password = input(f"Enter password for {username} account: ")
+            if master_password == input_password:
+                return False, username
+            else:
+                print("Incorrect Password !")
+                return True, username
     except FileNotFoundError:
-        with open("username.txt","w") as f:
-            username = input("Enter your username: ")
+        with open("master.txt","w") as f:
+            username = input("Enter username: ")
+            master_password = input("Enter password: ")
+            f.write(f"{encrypt(username)}\n")
+            f.write(encrypt(master_password))
+            if os.path.exists("random_passwords.txt"):
+                os.remove("random_passwords.txt")
+        return False, username
 
-    with open("username.txt","w") as f:
-        f.write(str(encrypt(username)))
-    print(f"Welcome to the password manager {username}!")
-    return username
+run = True
+while run:
+    run, username = start()
 
-username = user()
-pwd = pwd_maker()
+while True:
+    while True:
+        try:
+            u = int(input('''
+Options:
+1. Create and save a new password
+2. Display all passwords
+3. Save and Exit\n
+>>> '''))
+        except ValueError:
+            print("Invalid Input")
+            continue
+        break
+    if u==1:
+        pwd_maker()
+    elif u==2:
+        pwd_display()
+    elif u==3:
+        quit()
+    else:
+        print("Invalid input")
