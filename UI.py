@@ -10,13 +10,6 @@ root.geometry('1200x750')
 root.title("PASSWORD GENERATOR")
 root.minsize(550, 550)
 
-
-photo = Image.open('Password generator/4.jpg')
-picture = ImageTk.PhotoImage(photo)
-pict = Label(image = picture)
-pict.place(x = 0, y = 0, relwidth=1, relheight=1)
-
-
 heading = Label(text = 'Welcome to Password Generator', font = 'comicsansms 25 bold', bg = 'black', fg = 'red')
 heading.pack()
 
@@ -44,8 +37,5 @@ len_entry.pack(pady = 20, padx = 10)
 
 generate = Button(frame, text = 'Generate Password', font = 'comicsansms 13')
 generate.pack()
-
-pw_gen = Entry(frame, text = '', font = 'helvetica 25')
-pw_gen.pack(pady = 20, anchor = 'nw', padx = 10)
 
 root.mainloop()
