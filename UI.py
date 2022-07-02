@@ -21,11 +21,11 @@ def parameters_UI():
 
     ###Frame for criterias
     frame = LabelFrame(root, padx = 20, pady = 20, bg = '#ADD8E6', relief = RAISED, borderwidth=7)
-    frame.place(x = 30, y = 100)
+    frame.pack(pady=150)
 
     ###Heading for criterias
     criteria = Label(frame, text = '\n\nSelect the criterias for your password', font = 'helvetica 15 bold', fg = 'black', bg = '#ADD8E6')
-    criteria.pack(anchor= 'nw')
+    criteria.pack()
 
     ###Checkbox Command
     def checkbox():
@@ -77,7 +77,21 @@ def parameters_UI():
 
 
 def invalid_UI():
-    messagebox.showerror("showerror", "Invalid Input!") 
+    root = Tk()
+    root.geometry('200x100')
+    root.title("Error")
+    root.configure(bg = "white")
+
+    def ok_button():
+        root.destroy()
+
+    invalid = Label(text='\nInvalid Input!', bg = 'white', font = 'helvetica 16')
+    invalid.pack()
+
+    ok_button = Button(text = 'OK', font = 'helvetica 10', command = ok_button)
+    ok_button.pack(pady = 10, padx=20)
+
+    root.mainloop()
 
 
 def master_UI():
