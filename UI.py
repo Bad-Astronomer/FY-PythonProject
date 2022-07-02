@@ -6,7 +6,7 @@ from tkinter import messagebox
 def parameters_UI():
     ###main window
     root = Tk()
-    root.geometry('250x250')
+    root.geometry('750x1000')
     root.title("PASSWORD GENERATOR")
     root.minsize(550, 550)
     root.configure(bg = 'white')
