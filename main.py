@@ -106,16 +106,20 @@ def start():
                 os.remove("random_passwords.txt")
                 os.remove("master.txt")
                 quit() 
-            input_password = input(f"Enter master password for {username} account: ")
-            if master_password == input_password:  
+            while True:
+                try:
+                    input_username, input_password = UI.master_UI()
+                except NameError:
+                    continue
+                break
+            if master_password == input_password and username == input_username:  
                 return False, username
             else: #input password is not the same as master
                 print("Incorrect Password !")
                 return True, username
     except FileNotFoundError:
         with open("master.txt","w") as f: #on first boot/ master file was deleted
-            username = input("Enter username (Pernamnant): ")
-            master_password = input("Enter strong master password (Permanant): ")
+            username, master_password = UI.master_UI()
             f.write(f"{encrypt(username)}\n") #write username
             f.write(encrypt(master_password)) #write password
             os.system("attrib +h master.txt") #hides master file
@@ -131,14 +135,9 @@ while run:
 while True:
     while True:
         try:
-            u = int(input('''
-Options:
-1. Create and save a new password
-2. Display all passwords
-3. Save and Exit\n
->>> '''))
+            u = UI.display_UI()
         except ValueError:
-            print("Invalid Input")
+            UI.invalid_UI()
             continue
         break
     if u==1:
