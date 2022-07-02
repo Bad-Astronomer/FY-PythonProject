@@ -75,5 +75,90 @@ def parameters_UI():
         num = True
     return spchar, num, inp
 
+
 def invalid_UI():
-    messagebox.showerror("showerror", "Invalid Input!")
+    messagebox.showerror("showerror", "Invalid Input!") 
+
+
+def master_UI():
+    #widget is created
+    window = Tk()
+    window.geometry('750x1000')
+    window.title("PASSWORD GENERATOR")
+    window.minsize(550, 550)
+    window.configure(bg='white')
+
+    # title
+    title = Label(window, text='''Welcome User
+    Enter your credentials
+    ''', font='Times 25 bold',bg='white', pady=20, fg='black')
+    title.pack()
+
+    frame = LabelFrame(window, padx=20, pady=20, bg='#ADD8E6',
+                    relief=RAISED, borderwidth=7)
+    frame.pack(padx=30, pady=10)
+
+    def close():
+        global usr
+        global pwd
+        usr = username.get()
+        pwd = password.get()
+        window.destroy()
+    # username
+    details = LabelFrame(frame, text='Enter Username: ', bg='#ADD8E6')
+    username = Entry(details, font='helvetica 20')
+    details.pack(pady=15, padx=10)
+    username.pack(pady=20, padx=10)
+
+    # master password
+    details = LabelFrame(frame, text='Enter Master Password: ', bg='#ADD8E6')
+    password = Entry(details, font='helvetica 20')
+    details.pack(pady=15, padx=10)
+    password.pack(pady=20, padx=10)
+
+    enter = Button(frame, text = 'Enter', font = 'helvetica 15', command = close)
+    enter.pack(pady = 20)
+
+    window.mainloop()
+    return usr, pwd
+
+
+def display_UI():
+    root = Tk()
+    root.geometry('750x1000')
+    root.title("Menu Options")
+    root.configure(bg = 'white')
+
+    frame = LabelFrame(root, bg = '#ADD8E6', relief=RAISED, borderwidth=7)
+    frame.pack(pady=150)
+
+
+    def create():
+        global a
+        a = 1
+        root.destroy()    
+
+    def show():
+        global a
+        a = 2
+        root.destroy()
+
+    def save_exit():
+        global a
+        a = 3
+        root.destroy()
+
+    option = Label(frame, text = 'Select the Menu Option', font = 'helvetica 25', fg = 'black', bg = '#ADD8E6')
+    option.pack(padx = 50, pady = 30)
+
+    create = Button(frame, text = 'Create New Password', font = 'helvetica 15', command=create)
+    create.pack(pady = 10)
+
+    show = Button(frame, text='Show saved Passwords', font='helvetica 15', command=show)
+    show.pack(pady = 10)
+
+    save_exit = Button(frame, text = 'Save & Exit', font = 'helvetica 15', command = save_exit)
+    save_exit.pack(pady = 10)
+
+    root.mainloop()
+    return a
