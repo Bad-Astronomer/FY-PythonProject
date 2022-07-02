@@ -1,0 +1,36 @@
+from tkinter import *
+
+root = Tk()
+root.geometry('750x1000')
+root.title("Menu Options")
+root.configure(bg = 'yellow')
+
+frame = LabelFrame(root, bg = '#ADD8E6', relief=RAISED, borderwidth=7)
+frame.pack(pady=150)
+
+a = int()
+def create():
+    a = 0    
+    print(a)
+
+def show():
+    a = 1
+    print(a)
+
+def save_exit():
+    a = 2
+    print(a)
+    
+option = Label(frame, text = 'Select the Menu Option', font = 'helvetica 25', fg = 'red', bg = '#ADD8E6')
+option.pack(padx = 50, pady = 30)
+
+create = Button(frame, text = 'Create New Password', font = 'helvetica 15', command=create)
+create.pack(pady = 10)
+
+show = Button(frame, text='Show saved Passwords', font='helvetica 15', command=show)
+show.pack(pady = 10)
+
+save_exit = Button(frame, text = 'Save & Exit', font = 'helvetica 15', command = save_exit)
+save_exit.pack(pady = 10)
+
+root.mainloop()
