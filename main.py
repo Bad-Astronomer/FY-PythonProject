@@ -2,6 +2,7 @@ import string
 import random
 import base64
 import os
+import UI
 
 def pwd_gen(length, special, digits, toggle):
     pwd= []
@@ -31,34 +32,19 @@ def pwd_gen(length, special, digits, toggle):
 def parameters():
     #Exception Handling format 
     while True:
-        toggle = 0
-        print("Enter the requirements of the password to be generated:")
+        toggle = 0 #a variable to set characterset
         try:
             #Toggle for special characters
-            special = input("Special characters in password(Y/N): ")
-            if special.lower() == "y":
-                special = True
+            special, digits, length = UI.parameters_UI()
+            if special:
                 toggle += 1
-            elif special.lower() == "n":
-                special = False
-            else:
-                special = int("Invalid")
-            #Toggle for numbers
-            digits = input("Numbers in password(Y/N): ")
-            if digits.lower() == "y":
-                digits = True
+            if digits:
                 toggle += 1
-            elif digits.lower() == "n":
-                digits = False
-            else:
-                digits = int("Invalid")
-            #Input Length of Password
-            length = int(input("Enter length of password: "))
-            if length < toggle+2: #To make sure all types are included
-                print("Since Length of the password is too short,")
+            length = int(length)
+            if length <= toggle+2: #To make sure all types are included
                 length = int("Invalid")
         except ValueError:
-            print("Invalid input")
+            UI.invalid_UI()
             continue
         break
     return length, special, digits, toggle
@@ -75,16 +61,21 @@ def pwd_maker():
             break
     final_password = f"{caption} : {password}" #save format
     final_password = encrypt(final_password) #encryption
+    os.system("attrib -h random_passwords.txt")
     with open(f"random_passwords.txt","a") as f:
         f.write(f"{final_password}\n") #storing excrpyted password
+    os.system("attrib +h random_passwords.txt")
     print(f'"{decrypt(final_password)}" stored successfully!')
 
 
 def pwd_display(): #displaying passwords
-    with open("random_passwords.txt","r") as f:
-        for line in f.readlines(): #taking single line from file
-            line = line.replace("\n","")
-            print(f"{decrypt(line)}") #printing decrypted line
+    try:
+        with open("random_passwords.txt","r") as f:
+            for line in f.readlines(): #taking single line from file
+                line = line.replace("\n","")
+                print(f"{decrypt(line)}") #printing decrypted line
+    except FileNotFoundError:
+        UI.invalid_UI()
 
 
 def encrypt(string_sample): #base64 encryprion
@@ -107,23 +98,31 @@ def start():
             master = []
             for line in f.readlines():
                 master.append(decrypt(line))
-            username = master[0].replace("\n","")
-            master_password = master[1].replace("\n","")
-            input_password = input(f"Enter password for {username} account: ")
-            if master_password == input_password:
+            try:
+                username = master[0].replace("\n","")
+                master_password = master[1].replace("\n","")
+            except IndexError: #incase master file contents were deleted
+                print("Master file was tampered with!\nDeleting passwords...")
+                os.remove("random_passwords.txt")
+                os.remove("master.txt")
+                quit() 
+            input_password = input(f"Enter master password for {username} account: ")
+            if master_password == input_password:  
                 return False, username
-            else:
+            else: #input password is not the same as master
                 print("Incorrect Password !")
                 return True, username
     except FileNotFoundError:
-        with open("master.txt","w") as f:
-            username = input("Enter username: ")
-            master_password = input("Enter password: ")
-            f.write(f"{encrypt(username)}\n")
-            f.write(encrypt(master_password))
-            if os.path.exists("random_passwords.txt"):
-                os.remove("random_passwords.txt")
+        with open("master.txt","w") as f: #on first boot/ master file was deleted
+            username = input("Enter username (Pernamnant): ")
+            master_password = input("Enter strong master password (Permanant): ")
+            f.write(f"{encrypt(username)}\n") #write username
+            f.write(encrypt(master_password)) #write password
+            os.system("attrib +h master.txt") #hides master file
+            if os.path.exists("random_passwords.txt"): #incase master file was deleted
+                os.remove("random_passwords.txt") #passwords will be deleted 
         return False, username
+        
 
 run = True
 while run:
@@ -147,6 +146,7 @@ Options:
     elif u==2:
         pwd_display()
     elif u==3:
+        print("Have a good day!")
         quit()
     else:
         print("Invalid input")
