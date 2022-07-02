@@ -31,5 +31,7 @@ pwd = password.get()
 details.pack(pady=15, padx=10)
 password.pack(pady=20, padx=10)
 
+exit = Button(frame, text="Quit Program", command=window.destroy)
+exit.pack(padx=10)
 
 window.mainloop()
