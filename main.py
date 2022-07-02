@@ -41,7 +41,7 @@ def parameters():
             if digits:
                 toggle += 1
             length = int(length)
-            if length <= toggle+2: #To make sure all types are included
+            if length <= toggle+2 or length > 20: #To make sure all types are included
                 length = int("Invalid")
         except ValueError:
             UI.invalid_UI()
@@ -136,9 +136,9 @@ while True:
     while True:
         try:
             u = UI.display_UI()
-        except ValueError:
-            UI.invalid_UI()
-            continue
+        except NameError:
+            print("Have a good day!")
+            quit()
         break
     if u==1:
         pwd_maker()
@@ -147,5 +147,3 @@ while True:
     elif u==3:
         print("Have a good day!")
         quit()
-    else:
-        print("Invalid input")
