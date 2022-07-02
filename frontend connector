@@ -44,8 +44,8 @@ var = StringVar(value = 'No Characters')
 var1 = StringVar(value = 'No digits')
 
 ###Creating Checkboxes
-special = Checkbutton(frame, text = 'Special Characters', variable=var, onvalue="Include Char",offvalue='No Characters', font = 'helvetica 10 bold', bg = '#ADD8E6')
-special.pack(anchor = 'nw', pady = 10)
+special_char = Checkbutton(frame, text = 'Special Characters', variable=var, onvalue="Include Char",offvalue='No Characters', font = 'helvetica 10 bold', bg = '#ADD8E6')
+special_char.pack(anchor = 'nw', pady = 10)
 
 digits = Checkbutton(frame, text = 'Numbers in password', onvalue="Include digits", offvalue="No digits", variable=var1, font = 'helvetica 10 bold', bg = '#ADD8E6')
 digits.pack(anchor = 'nw')
