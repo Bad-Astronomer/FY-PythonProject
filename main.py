@@ -47,6 +47,7 @@ def parameters():
                 continue
             if length <= toggle+2:
                 UI.alert_UI(f"Length should be greater than {toggle+2}!")
+                continue
         except ValueError:
             UI.alert_UI("Please Enter an Integer value!")
             continue
