@@ -2,6 +2,6 @@ Title :
 PASSWORD MANAGER
 
 Members :
-1) Shivom Karnad - 16010121081
-2) Ayush Khandare - 16010121084
-3) Kedar Kulkarni - 16010121096
+1) 16010121081 - Shivom Karnad
+2) 16010121084 - Ayush Khandare
+3) 16010121096 - Kedar Kulkarni
