@@ -55,10 +55,12 @@ def pwd_maker():
     while True:
         length, special, digits, toggle = parameters() #taking password criteria
         password = pwd_gen(length, special, digits, toggle+2) #generating password
-        print(password) #asking user to keep the password or not
-        keep = input("KEEP Password(Y/N): ")
-        if keep.lower() == "y":
-            caption = input("Enter a tag for password: ")
+        caption = UI.pwd_maker_UI(password)
+        print(caption)
+        if type(caption) == str:
+            if caption.find(":") != -1:
+                UI.invalid_UI()
+                continue
             break
     final_password = f"{caption} : {password}" #save format
     final_password = encrypt(final_password) #encryption
@@ -98,7 +100,7 @@ def decrypt(base64_string): #base64 decryption
     return string_sample
 
 
-def start():
+def master():
     try:
         with open("master.txt","r") as f:
             master = []
@@ -136,7 +138,7 @@ def start():
 
 run = True
 while run:
-    run, username = start()
+    run, username = master()
 
 while True:
     while True:
