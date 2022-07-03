@@ -217,3 +217,47 @@ def pwd_display_UI(caption, password):
     ok_button.pack(pady = 10, padx=20)
 
     window.mainloop()
+
+
+def pwd_maker_UI(password):
+    root = Tk()
+    root.geometry('750x1000')
+    root.title('Generated Password')
+    root.configure(bg = 'white')
+
+    def keep_pw():
+        def save_button():
+            global input_tag
+            input_tag = entrybox.get()
+            root.destroy()
+                
+        sitename = LabelFrame(frame, text = 'Enter the name in which you want to store the password', bg = '#ADD8E6', font = 'helvetica 12 bold')
+        sitename.pack(pady = 15, padx = 10)
+        entrybox = Entry(sitename, font = 'helvetica 15')
+        entrybox.pack(pady = 20, padx = 10)
+        ok_button = Button(frame, text = 'SAVE & EXIT', font = 'helvetica 10', command = save_button)
+        ok_button.pack(pady = 10, padx=20)
+
+    def regenerate():
+        global regen
+        regen = 1
+        root.destroy()
+
+    frame = LabelFrame(root, bg = '#ADD8E6', relief=RAISED, borderwidth=7)
+    frame.pack(pady = 150)
+
+    pw_display = Label(frame, text = password, font = 'helvetica 20', bg = '#ADD8E6', fg = 'red')
+    pw_display.pack(pady = 15, padx = 50)
+
+    keep = Button(frame, text = 'Keep the password', font = 'helvetica 10', command = keep_pw)
+    keep.pack(pady = 10)
+
+    regenerate = Button(frame, text = 'Regenerate Password', font = 'helvetica 10', command = regenerate)
+    regenerate.pack(pady = 10)
+
+    root.mainloop()
+    try:
+        if regen == 1:
+            return False
+    except NameError:
+        return input_tag
