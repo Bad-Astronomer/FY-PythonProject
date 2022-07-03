@@ -4,6 +4,7 @@ import base64
 import os
 import UI
 
+
 def pwd_gen(length, special, digits, toggle):
     pwd= []
     #Entire character set
@@ -70,10 +71,15 @@ def pwd_maker():
 
 def pwd_display(): #displaying passwords
     try:
+        caption, password = [], []
         with open("random_passwords.txt","r") as f:
             for line in f.readlines(): #taking single line from file
                 line = line.replace("\n","")
-                print(f"{decrypt(line)}") #printing decrypted line
+                line = decrypt(line)
+                contents = line.split(":")
+                caption.append(contents[0])
+                password.append(contents[1])
+        UI.pwd_display_UI(caption, password)
     except FileNotFoundError:
         UI.invalid_UI()
 
@@ -110,7 +116,7 @@ def start():
                 try:
                     input_username, input_password = UI.master_UI()
                 except NameError:
-                    continue
+                    quit()
                 break
             if master_password == input_password and username == input_username:  
                 return False, username
