@@ -1,5 +1,4 @@
 from tkinter import *
-from PIL import Image, ImageTk
 
 
 def parameters_UI():
@@ -133,7 +132,11 @@ def master_UI():
     enter.pack(pady = 20)
 
     window.mainloop()
-    return usr, pwd
+    try:
+        return usr, pwd
+    except NameError:
+        alert_UI("Have a good day!")
+        quit()
 
 
 def display_UI():
@@ -145,6 +148,8 @@ def display_UI():
     frame = LabelFrame(root, bg = '#ADD8E6', relief=RAISED, borderwidth=7)
     frame.pack(pady=150)
 
+    global a 
+    a = 0
 
     def create():
         global a
@@ -204,7 +209,6 @@ def pwd_display_UI(caption, password):
     disp = Listbox(frame, bg='#ADD8E6', font='helvetica 17',
                 yscrollcommand=scrollbar.set)
 
-    # before execution check if len(passwords) == len(tags) else call Invalid_UI
     for i in range(len(passwords)):
         disp.insert(END, tags[i] + ':')
         disp.itemconfig(END, bg='#3aeb34')
@@ -220,6 +224,8 @@ def pwd_display_UI(caption, password):
 
 
 def pwd_maker_UI(password):
+    global regen
+    regen = 0
     root = Tk()
     root.geometry('750x1000')
     root.title('Generated Password')
@@ -229,13 +235,16 @@ def pwd_maker_UI(password):
         def save_button():
             global input_tag
             input_tag = entrybox.get()
-            root.destroy()
+            if input_tag == "":
+                input_tag = ""
+            else:
+                root.destroy()
                 
-        sitename = LabelFrame(frame, text = 'Enter the name in which you want to store the password', bg = '#ADD8E6', font = 'helvetica 12 bold')
+        sitename = LabelFrame(frame, text = 'Enter the name to store the password with', bg = '#ADD8E6', font = 'helvetica 12 bold')
         sitename.pack(pady = 15, padx = 10)
         entrybox = Entry(sitename, font = 'helvetica 15')
         entrybox.pack(pady = 20, padx = 10)
-        ok_button = Button(frame, text = 'SAVE & EXIT', font = 'helvetica 10', command = save_button)
+        ok_button = Button(frame, text = 'SAVE', font = 'helvetica 10', command = save_button)
         ok_button.pack(pady = 10, padx=20)
 
     def regenerate():
@@ -256,8 +265,29 @@ def pwd_maker_UI(password):
     regenerate.pack(pady = 10)
 
     root.mainloop()
-    try:
-        if regen == 1:
-            return False
-    except NameError:
+    if regen == 1:
+        return False
+    if regen == 0:
         return input_tag
+
+
+def alert_UI(message):
+    root = Tk()
+    root.geometry('300x100')
+    root.title("")
+    root.configure(bg = "white")
+
+    def ok_button():
+        root.destroy()
+
+    invalid = Label(text=f'\n{message}', bg = 'white', font = 'helvetica 16')
+    invalid.pack()
+
+    text = "OK"
+    if message == "Have a good day!":
+        text = "Thank you!"
+
+    ok_button = Button(text = f"{text}", font = 'helvetica 10', command = ok_button)
+    ok_button.pack(pady = 10, padx=20)
+
+    root.mainloop()
