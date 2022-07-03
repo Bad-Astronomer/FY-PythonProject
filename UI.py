@@ -22,7 +22,7 @@ def parameters_UI():
     frame.pack(pady=150)
 
     ###Heading for criterias
-    criteria = Label(frame, text = '\n\nSelect the criterias for your password', font = 'helvetica 15 bold', fg = 'black', bg = '#ADD8E6')
+    criteria = Label(frame, text = '\n\nSelect the criterias for your password', font = 'helvetica 20', fg = 'black', bg = '#ADD8E6')
     criteria.pack()
 
     ###Checkbox Command
@@ -39,10 +39,10 @@ def parameters_UI():
     var1 = StringVar(value = 'No digits')
 
     ###Creating Checkboxes
-    special_char = Checkbutton(frame, text = 'Special Characters', variable=var, onvalue="Include Char",offvalue='No Characters', font = 'helvetica 10 bold', bg = '#ADD8E6')
+    special_char = Checkbutton(frame, text = 'Special Characters', variable=var, onvalue="Include Char",offvalue='No Characters', font = 'helvetica 15', bg = '#ADD8E6')
     special_char.pack(anchor = 'nw', pady = 10)
 
-    digits = Checkbutton(frame, text = 'Numbers in password', onvalue="Include digits", offvalue="No digits", variable=var1, font = 'helvetica 10 bold', bg = '#ADD8E6')
+    digits = Checkbutton(frame, text = 'Numbers in password', onvalue="Include digits", offvalue="No digits", variable=var1, font = 'helvetica 15', bg = '#ADD8E6')
     digits.pack(anchor = 'nw')
 
     response_special = Label(root)
@@ -52,14 +52,14 @@ def parameters_UI():
     #response_digits.place(x = 30, y = 480)
 
     #Creating Length Criteria
-    length = LabelFrame(frame, text = 'Enter the length of password you want to generate', bg = '#ADD8E6', font = 'helvetica 12 bold')
+    length = LabelFrame(frame, text = 'Enter the length of password you want to generate', bg = '#ADD8E6', font = 'helvetica 15')
     length.pack(anchor = 'nw', pady = 15, padx = 10)
     len_entry = Text(length, height = 1, width = 20)
     len_entry.pack(pady = 20, padx = 10)
 
 
     ###Creating Generate Button
-    generate = Button(frame, text = 'Generate Password', font = 'comicsansms 13', command = checkbox)
+    generate = Button(frame, text = 'Generate Password', font = 'helvatica 15', command = checkbox)
     generate.pack()
     root.mainloop()
     
@@ -74,28 +74,11 @@ def parameters_UI():
     return spchar, num, inp
 
 
-def invalid_UI():
-    root = Tk()
-    root.geometry('200x100')
-    root.title("Error")
-    root.configure(bg = "white")
-
-    def ok_button():
-        root.destroy()
-
-    invalid = Label(text='\nInvalid Input!', bg = 'white', font = 'helvetica 16')
-    invalid.pack()
-
-    ok_button = Button(text = 'OK', font = 'helvetica 10', command = ok_button)
-    ok_button.pack(pady = 10, padx=20)
-
-    root.mainloop()
-
 
 def master_UI():
     #widget is created
     window = Tk()
-    window.geometry('750x1000')
+    window.geometry('750x600')
     window.title("PASSWORD GENERATOR")
     window.minsize(550, 550)
     window.configure(bg='white')
@@ -141,7 +124,7 @@ def master_UI():
 
 def display_UI():
     root = Tk()
-    root.geometry('750x1000')
+    root.geometry('750x600')
     root.title("Menu Options")
     root.configure(bg = 'white')
 
@@ -227,7 +210,7 @@ def pwd_maker_UI(password):
     global regen
     regen = 0
     root = Tk()
-    root.geometry('750x1000')
+    root.geometry('750x600')
     root.title('Generated Password')
     root.configure(bg = 'white')
 
@@ -268,12 +251,16 @@ def pwd_maker_UI(password):
     if regen == 1:
         return False
     if regen == 0:
-        return input_tag
+        try:
+            return input_tag
+        except NameError:
+            alert_UI("Have a good day!")
+            quit()
 
 
 def alert_UI(message):
     root = Tk()
-    root.geometry('300x100')
+    root.geometry('350x100')
     root.title("")
     root.configure(bg = "white")
 
