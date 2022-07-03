@@ -4,7 +4,7 @@ from tkinter import *
 def parameters_UI():
     ###main window
     root = Tk()
-    root.geometry('750x1000')
+    root.geometry('750x700')
     root.title("PASSWORD GENERATOR")
     root.minsize(550, 550)
     root.configure(bg = 'white')
@@ -22,7 +22,7 @@ def parameters_UI():
     frame.pack(pady=150)
 
     ###Heading for criterias
-    criteria = Label(frame, text = '\n\nSelect the criterias for your password', font = 'helvetica 20', fg = 'black', bg = '#ADD8E6')
+    criteria = Label(frame, text = '\n\nSelect the criterias for your password', font = 'helvetica 20 bold', fg = 'black', bg = '#ADD8E6')
     criteria.pack()
 
     ###Checkbox Command
@@ -52,9 +52,9 @@ def parameters_UI():
     #response_digits.place(x = 30, y = 480)
 
     #Creating Length Criteria
-    length = LabelFrame(frame, text = 'Enter the length of password you want to generate', bg = '#ADD8E6', font = 'helvetica 15')
+    length = LabelFrame(frame, text = 'Enter the length of password you want to generate', bg = '#ADD8E6', font = 'helvetica 15 bold')
     length.pack(anchor = 'nw', pady = 15, padx = 10)
-    len_entry = Text(length, height = 1, width = 20)
+    len_entry = Text(length, height = 1, width = 20, font = 20)
     len_entry.pack(pady = 20, padx = 10)
 
 
@@ -101,13 +101,13 @@ def master_UI():
         window.destroy()
     # username
     details = LabelFrame(frame, text='Enter Username: ', bg='#ADD8E6')
-    username = Entry(details, font='helvetica 20')
+    username = Entry(details, font='helvetica 15')
     details.pack(pady=15, padx=10)
     username.pack(pady=20, padx=10)
 
     # master password
     details = LabelFrame(frame, text='Enter Master Password: ', bg='#ADD8E6')
-    password = Entry(details, font='helvetica 20')
+    password = Entry(details, font='helvetica 15')
     details.pack(pady=15, padx=10)
     password.pack(pady=20, padx=10)
 
@@ -210,7 +210,7 @@ def pwd_maker_UI(password):
     global regen
     regen = 0
     root = Tk()
-    root.geometry('750x600')
+    root.geometry('750x700')
     root.title('Generated Password')
     root.configure(bg = 'white')
 
