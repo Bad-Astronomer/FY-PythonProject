@@ -41,11 +41,14 @@ def parameters():
                 toggle += 1
             if digits:
                 toggle += 1
-            length = int(length)
-            if length <= toggle+2 or length > 20: #To make sure all types are included
-                length = int("Invalid")
+            length = int(length) #to check if length is an integer
+            if length > 20: #To make sure all types are included
+                UI.alert_UI("Length cannot be greater than 20!")
+                continue
+            if length <= toggle+2:
+                UI.alert_UI(f"Length should be greater than {toggle+2}!")
         except ValueError:
-            UI.invalid_UI()
+            UI.alert_UI("Please Enter an Integer value!")
             continue
         break
     return length, special, digits, toggle
@@ -56,10 +59,9 @@ def pwd_maker():
         length, special, digits, toggle = parameters() #taking password criteria
         password = pwd_gen(length, special, digits, toggle+2) #generating password
         caption = UI.pwd_maker_UI(password)
-        print(caption)
         if type(caption) == str:
             if caption.find(":") != -1:
-                UI.invalid_UI()
+                UI.alert_UI("':' is an Invalid Input!")
                 continue
             break
     final_password = f"{caption} : {password}" #save format
@@ -68,7 +70,6 @@ def pwd_maker():
     with open(f"random_passwords.txt","a") as f:
         f.write(f"{final_password}\n") #storing excrpyted password
     os.system("attrib +h random_passwords.txt")
-    print(f'"{decrypt(final_password)}" stored successfully!')
 
 
 def pwd_display(): #displaying passwords
@@ -83,7 +84,7 @@ def pwd_display(): #displaying passwords
                 password.append(contents[1])
         UI.pwd_display_UI(caption, password)
     except FileNotFoundError:
-        UI.invalid_UI()
+        UI.alert_UI("No passwords were created!")
 
 
 def encrypt(string_sample): #base64 encryprion
@@ -110,7 +111,6 @@ def master():
                 username = master[0].replace("\n","")
                 master_password = master[1].replace("\n","")
             except IndexError: #incase master file contents were deleted
-                print("Master file was tampered with!\nDeleting passwords...")
                 os.remove("random_passwords.txt")
                 os.remove("master.txt")
                 quit() 
@@ -118,12 +118,13 @@ def master():
                 try:
                     input_username, input_password = UI.master_UI()
                 except NameError:
+                    UI.alert_UI("Have a good day!")
                     quit()
                 break
             if master_password == input_password and username == input_username:  
                 return False, username
             else: #input password is not the same as master
-                print("Incorrect Password !")
+                UI.alert_UI("Incorrect Password!")
                 return True, username
     except FileNotFoundError:
         with open("master.txt","w") as f: #on first boot/ master file was deleted
@@ -142,10 +143,9 @@ while run:
 
 while True:
     while True:
-        try:
-            u = UI.display_UI()
-        except NameError:
-            print("Have a good day!")
+        u = UI.display_UI()
+        if u == 0:
+            UI.alert_UI("Have a good day!")
             quit()
         break
     if u==1:
@@ -153,5 +153,5 @@ while True:
     elif u==2:
         pwd_display()
     elif u==3:
-        print("Have a good day!")
+        UI.alert_UI("Have a good day!")
         quit()
