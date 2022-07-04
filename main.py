@@ -123,7 +123,7 @@ def master():
             if master_password == input_password and username == input_username: #valid credentials
                 return False, username #stop loop
             else: #input password is not the same as master
-                UI.alert_UI("Incorrect Password!")
+                UI.alert_UI("Incorrect Credentials!")
                 return True, username #reloop
 
     except FileNotFoundError:
