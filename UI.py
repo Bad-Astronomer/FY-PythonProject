@@ -13,7 +13,7 @@ def parameters_UI():
 
 
     ###Bg Image
-    photo = Image.open('Password generator/bg image.jpg')
+    photo = Image.open('Password manager/bg image.jpg')
     picture = ImageTk.PhotoImage(photo)
     pict = Label(image = picture)
     pict.place(x = 0, y = 0, relwidth=1, relheight=1)
@@ -87,7 +87,7 @@ def master_UI():
 
 
         ###Bg Image
-    photo = Image.open('Password generator/bg image.jpg')
+    photo = Image.open('Password manager/bg image.jpg')
     picture = ImageTk.PhotoImage(photo)
     pict = Label(image = picture)
     pict.place(x = 0, y = 0, relwidth=1, relheight=1)
@@ -140,7 +140,7 @@ def display_UI():
     root.maxsize(1200,750)
 
     ###Bg Image
-    photo = Image.open('Password generator/bg image.jpg')
+    photo = Image.open('Password manager/bg image.jpg')
     picture = ImageTk.PhotoImage(photo)
     pict = Label(image = picture)
     pict.place(x = 0, y = 0, relwidth=1, relheight=1)
@@ -195,7 +195,7 @@ def pwd_display_UI(caption, password):
     window.maxsize(1200,750)
 
     ###Bg Image
-    photo = Image.open('Password generator/bg image.jpg')
+    photo = Image.open('Password manager/bg image.jpg')
     picture = ImageTk.PhotoImage(photo)
     pict = Label(image = picture)
     pict.place(x = 0, y = 0, relwidth=1, relheight=1)
@@ -242,7 +242,7 @@ def pwd_maker_UI(password):
     root.maxsize(1200,750)
 
     ###Bg Image
-    photo = Image.open('Password generator/bg image.jpg')
+    photo = Image.open('Password manager/bg image.jpg')
     picture = ImageTk.PhotoImage(photo)
     pict = Label(image = picture)
     pict.place(x = 0, y = 0, relwidth=1, relheight=1)
