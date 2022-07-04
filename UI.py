@@ -1,5 +1,4 @@
 from tkinter import * 
-from PIL import Image, ImageTk #background image
 
 def parameters_UI():
     ###main window
@@ -13,10 +12,9 @@ def parameters_UI():
 
 
     ###Bg Image
-    photo = Image.open('bg image.jpg')
-    picture = ImageTk.PhotoImage(photo)
-    pict = Label(image = picture)
-    pict.place(x = 0, y = 0, relwidth=1, relheight=1)
+    photo = PhotoImage(file = 'Password manager/bg image.png')
+    picture = Label(image = photo)
+    picture.place(x = 0, y = 0, relwidth=1, relheight=1)
 
 
     ###Frame for criterias
@@ -80,17 +78,15 @@ def master_UI():
     window = Tk()
     window.geometry('1200x750')
     window.title("PASSWORD GENERATOR")
-    window.minsize(550, 550)
     window.configure(bg='white')
     window.minsize(1200,750)
     window.maxsize(1200,750)
 
 
         ###Bg Image
-    photo = Image.open('bg image.jpg')
-    picture = ImageTk.PhotoImage(photo)
-    pict = Label(image = picture)
-    pict.place(x = 0, y = 0, relwidth=1, relheight=1)
+    photo = PhotoImage(file = 'Password manager/bg image.png')
+    picture = Label(image = photo)
+    picture.place(x = 0, y = 0, relwidth=1, relheight=1)
 
     # title
     title = Label(window, text='''Welcome User!! 
@@ -140,10 +136,9 @@ def display_UI():
     root.maxsize(1200,750)
 
     ###Bg Image
-    photo = Image.open('bg image.jpg')
-    picture = ImageTk.PhotoImage(photo)
-    pict = Label(image = picture)
-    pict.place(x = 0, y = 0, relwidth=1, relheight=1)
+    photo = PhotoImage(file = 'Password manager/bg image.png')
+    picture = Label(image = photo)
+    picture.place(x = 0, y = 0, relwidth=1, relheight=1)
 
     frame = LabelFrame(root, bg = '#ADD8E6', relief=RAISED, borderwidth=7)
     frame.pack(pady=150)
@@ -195,10 +190,9 @@ def pwd_display_UI(caption, password):
     window.maxsize(1200,750)
 
     ###Bg Image
-    photo = Image.open('bg image.jpg')
-    picture = ImageTk.PhotoImage(photo)
-    pict = Label(image = picture)
-    pict.place(x = 0, y = 0, relwidth=1, relheight=1)
+    photo = PhotoImage(file = 'Password manager/bg image.png')
+    picture = Label(image = photo)
+    picture.place(x = 0, y = 0, relwidth=1, relheight=1)
 
     def ok_button():
         window.destroy()
@@ -242,10 +236,9 @@ def pwd_maker_UI(password):
     root.maxsize(1200,750)
 
     ###Bg Image
-    photo = Image.open('bg image.jpg')
-    picture = ImageTk.PhotoImage(photo)
-    pict = Label(image = picture)
-    pict.place(x = 0, y = 0, relwidth=1, relheight=1)
+    photo = PhotoImage(file = 'Password manager/bg image.png')
+    picture = Label(image = photo)
+    picture.place(x = 0, y = 0, relwidth=1, relheight=1)
 
     def keep_pw():
         def save_button():
