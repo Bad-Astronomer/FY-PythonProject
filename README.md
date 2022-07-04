@@ -8,3 +8,6 @@ Members :
 
 Project Description:
 Password Manager is a simple but very handy tool to generate strong random passwords with a user defined criteria and store them in an encrypted hidden file. It will be only accessible if master username and password is entered correctly. 
+
+Note:
+Create a file named 'password manager' and download main.py, UI.py and bg image.jpg in it.
