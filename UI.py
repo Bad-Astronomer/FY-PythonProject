@@ -1,20 +1,22 @@
-from tkinter import *
-
+from tkinter import * 
+from PIL import Image, ImageTk #background image
 
 def parameters_UI():
     ###main window
     root = Tk()
-    root.geometry('750x700')
+    root.geometry('1200x750')
     root.title("PASSWORD GENERATOR")
     root.minsize(550, 550)
     root.configure(bg = 'white')
+    root.minsize(1200,750)
+    root.maxsize(1200,750)
 
 
     ###Bg Image
-    '''photo = Image.open('Password generator/4.jpg')
+    photo = Image.open('Password generator/bg image.jpg')
     picture = ImageTk.PhotoImage(photo)
     pict = Label(image = picture)
-    pict.place(x = 0, y = 0, relwidth=1, relheight=1)'''
+    pict.place(x = 0, y = 0, relwidth=1, relheight=1)
 
 
     ###Frame for criterias
@@ -46,10 +48,8 @@ def parameters_UI():
     digits.pack(anchor = 'nw')
 
     response_special = Label(root)
-    #response_special.place(x = 30, y = 450)
-
     response_digits = Label(root)
-    #response_digits.place(x = 30, y = 480)
+
 
     #Creating Length Criteria
     length = LabelFrame(frame, text = 'Enter the length of password you want to generate', bg = '#ADD8E6', font = 'helvetica 15 bold')
@@ -78,20 +78,29 @@ def parameters_UI():
 def master_UI():
     #widget is created
     window = Tk()
-    window.geometry('750x600')
+    window.geometry('1200x750')
     window.title("PASSWORD GENERATOR")
     window.minsize(550, 550)
     window.configure(bg='white')
+    window.minsize(1200,750)
+    window.maxsize(1200,750)
+
+
+        ###Bg Image
+    photo = Image.open('Password generator/bg image.jpg')
+    picture = ImageTk.PhotoImage(photo)
+    pict = Label(image = picture)
+    pict.place(x = 0, y = 0, relwidth=1, relheight=1)
 
     # title
-    title = Label(window, text='''Welcome User
-    Enter your credentials
-    ''', font='Times 25 bold',bg='white', pady=20, fg='black')
-    title.pack()
+    title = Label(window, text='''Welcome User!! 
+    Enter your credentials  ''', 
+    font='Times 25 bold',bg='white', pady=20, fg='black')
+    title.pack(pady = 20)
 
     frame = LabelFrame(window, padx=20, pady=20, bg='#ADD8E6',
                     relief=RAISED, borderwidth=7)
-    frame.pack(padx=30, pady=10)
+    frame.pack(padx=30, pady=90)
 
     def close():
         global usr
@@ -124,9 +133,17 @@ def master_UI():
 
 def display_UI():
     root = Tk()
-    root.geometry('750x600')
+    root.geometry('1200x750')
     root.title("Menu Options")
     root.configure(bg = 'white')
+    root.minsize(1200,750)
+    root.maxsize(1200,750)
+
+    ###Bg Image
+    photo = Image.open('Password generator/bg image.jpg')
+    picture = ImageTk.PhotoImage(photo)
+    pict = Label(image = picture)
+    pict.place(x = 0, y = 0, relwidth=1, relheight=1)
 
     frame = LabelFrame(root, bg = '#ADD8E6', relief=RAISED, borderwidth=7)
     frame.pack(pady=150)
@@ -170,10 +187,18 @@ def pwd_display_UI(caption, password):
     passwords = password
 
     window = Tk()
-    window.geometry('750x600')
+    window.geometry('1200x750')
     window.title("PASSWORD GENERATOR")
     window.minsize(550, 550)
     window.configure(bg='white')
+    window.minsize(1200,750)
+    window.maxsize(1200,750)
+
+    ###Bg Image
+    photo = Image.open('Password generator/bg image.jpg')
+    picture = ImageTk.PhotoImage(photo)
+    pict = Label(image = picture)
+    pict.place(x = 0, y = 0, relwidth=1, relheight=1)
 
     def ok_button():
         window.destroy()
@@ -210,9 +235,17 @@ def pwd_maker_UI(password):
     global regen
     regen = 0
     root = Tk()
-    root.geometry('750x700')
+    root.geometry('1200x750')
     root.title('Generated Password')
     root.configure(bg = 'white')
+    root.minsize(1200,750)
+    root.maxsize(1200,750)
+
+    ###Bg Image
+    photo = Image.open('Password generator/bg image.jpg')
+    picture = ImageTk.PhotoImage(photo)
+    pict = Label(image = picture)
+    pict.place(x = 0, y = 0, relwidth=1, relheight=1)
 
     def keep_pw():
         def save_button():
