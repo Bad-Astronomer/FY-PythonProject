@@ -1,5 +1,5 @@
 import string #for ascii letters and digits
-import random #for random password generation
+import random #for smhfrandom password generation
 import base64 #for base64 encoding and decoding
 import os #for deleting unrequired files and hiding certain others
 import UI #User Interface
