@@ -111,9 +111,23 @@ def master_UI():
 
     # master password
     details = LabelFrame(frame, text='Enter Master Password: ', bg='#ADD8E6')
-    password = Entry(details, font='helvetica 20')
+    password = Entry(details, font='helvetica 20', show='*')
+
+    check = IntVar(value=0)
+
+
+    def show():
+        if(check.get() == 1):
+            password.config(show='')  # display the chars
+        else:
+            password.config(show='*')  # hide the chars using mask
+
+
+    c1 = Checkbutton(details, text='Show Password', variable=check,
+                     onvalue=1, offvalue=0, command=show, bg='#ADD8E6')
     details.pack(pady=15, padx=10)
     password.pack(pady=20, padx=10)
+    c1.pack()
 
     enter = Button(frame, text = 'Enter', font = 'helvetica 15', command = close)
     enter.pack(pady = 20)
